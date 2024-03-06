@@ -28,8 +28,8 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-  mainModule = 'be.kuleuven.candycrushintellijproject'
-  mainClass = 'be.kuleuven.candycrushintellijproject.HelloApplication'
+  mainModule = 'be.kuleuven.candycrush'
+  mainClass = 'be.kuleuven.candycrush.HelloApplication'
 }
 
 javafx {
@@ -39,7 +39,8 @@ javafx {
 
 dependencies {
   implementation('org.controlsfx:controlsfx:11.1.2')
-  implementation 'com.google.code.gson:gson:2.10.1'
+  implementation 'be.kuleuven:Opdracht5:1.0-SNAPSHOT'
+
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }

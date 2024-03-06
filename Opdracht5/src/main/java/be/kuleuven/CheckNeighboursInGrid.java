@@ -1,6 +1,5 @@
 package be.kuleuven;
 
-import javax.naming.InsufficientResourcesException;
 import java.util.*;
 
 public class CheckNeighboursInGrid {
