@@ -10,8 +10,8 @@ public class CandyCrush {
     private String name;
 
     public CandyCrush() {
-        this.height = 6;
-        this.width = 6;
+        this.height = 10;
+        this.width = 10;
         this.name = "player32548";
         this.grid = new ArrayList<Integer>();
         this.score = 0;

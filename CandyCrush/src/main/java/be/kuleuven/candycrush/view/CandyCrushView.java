@@ -13,6 +13,7 @@ public class CandyCrushView extends Region {
         update();
     }
     public void update() {
+        getChildren().clear();
         int x = 0;
         int y = 0;
         for(int i : model.getGrid()) {
