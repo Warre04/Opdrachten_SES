@@ -38,8 +38,8 @@ public class CandyCrushView extends Region {
             case 3: return Color.GREEN;
             case 4: return Color.YELLOW;
             case 5: return Color.PURPLE;
-            default: return Color.BLACK;
         }
+        return null;
     }
 
 }

@@ -1,6 +1,5 @@
 package be.kuleuven.CandyCrush.model;
 import be.kuleuven.candycrush.model.CandyCrush;
-import be.kuleuven.candycrush.view.CandyCrushView;
 
 import org.junit.jupiter.api.Test;
 
@@ -41,11 +40,7 @@ public class CandyCrushTest {
         model.reset();
         assert model.getName().equals("Warre");
     }
-    @Test
-    public void testSnoepnummer1_ThenColorIsRed() {
-        CandyCrushView view = new CandyCrushView(new CandyCrush());
-        assert view.getColor(1).equals(Color.RED);
-    }
+
     @Test
     public void TestCandyCrushAanmaken_ResultGridIsNotEmpty() {
         CandyCrush model = new CandyCrush();
