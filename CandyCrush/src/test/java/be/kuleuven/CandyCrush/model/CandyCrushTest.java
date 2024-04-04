@@ -3,7 +3,6 @@ import be.kuleuven.candycrush.model.CandyCrush;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.scene.paint.Color;
 
 public class CandyCrushTest {
     @Test

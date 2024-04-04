@@ -1,17 +1,15 @@
 package be.kuleuven.candycrush.model;
 import java.util.ArrayList;
-import be.kuleuven.CheckNeighboursInGrid;
+
 public class CandyCrush {
 
     private ArrayList<Integer> grid;
     private int score;
-    private int height;
-    private int width;
+    private BoardSize boardSize;
     private String name;
 
     public CandyCrush() {
-        this.height = 10;
-        this.width = 10;
+        boardSize= new BoardSize(10,10);
         this.name = "player32548";
         this.grid = new ArrayList<Integer>();
         this.score = 0;
@@ -20,7 +18,7 @@ public class CandyCrush {
 
     public void generateGrid() {
         this.grid.clear();
-        for (int i = 0; i < this.height * this.width; i++) {
+        for (int i = 0; i < this.boardSize.hoogte() * this.boardSize.breedte(); i++) {
             this.grid.add((int) (Math.random() * 5)+1);
         }
     }
@@ -32,6 +30,7 @@ public class CandyCrush {
         this.score = 0;
         this.generateGrid();
     }
+
     public String getName() {
         return this.name;
     }
@@ -45,30 +44,39 @@ public class CandyCrush {
         this.score += score;
     }
     public int getHeight() {
-        return this.height;
+        return this.boardSize.hoogte();
     }
     public int getWidth() {
-        return this.width;
+        return this.boardSize.breedte();
+    }
+    public BoardSize getBoardSize() {
+        return this.boardSize;
     }
     public ArrayList<Integer> getGrid() {
         return this.grid;
     }
-    public void removeCandy(int index) {
-        ArrayList<Integer> candyToReplace = getCandyToRemove(index);
+
+    public void removeCandy(Position pos) {
+        ArrayList<Position> candyToReplace = (ArrayList<Position>) getSameNeighbours(pos);
         if(candyToReplace.size() < 3) {
             return;
         }
-        for (int i : candyToReplace) {
-            this.grid.set(i, (int) (Math.random() * 5)+1);
+        for (Position i : candyToReplace) {
+            this.grid.set(i.toIndex(), (int) (Math.random() * 5)+1);
         }
         addScore(candyToReplace.size());
     }
-    public ArrayList<Integer> getCandyToRemove(int index) {
-        Iterable<Integer> Igrid= (Iterable<Integer>) grid;
-        Iterable<Integer> IcandyToReplace = CheckNeighboursInGrid.getSameNeighboursIds(Igrid, this.width, this.height, index);
-        ArrayList<Integer> candyToReplace = (ArrayList<Integer>) IcandyToReplace;
-        candyToReplace.add(index);
-        return candyToReplace;
+
+    private Iterable<Position> getSameNeighbours(Position pos){
+        ArrayList<Position> neighborPositions= (ArrayList<Position>) pos.neighborPositions();
+        ArrayList<Position> equalNeighborPositions= new ArrayList<>();
+        equalNeighborPositions.add(pos);
+        for (Position neighbor : neighborPositions) {
+            if (this.grid.get(neighbor.toIndex()) == this.grid.get(pos.toIndex())) {
+                equalNeighborPositions.add(neighbor);
+            }
+        }
+        return equalNeighborPositions;
     }
 
 

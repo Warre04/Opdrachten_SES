@@ -1,5 +1,6 @@
 package be.kuleuven.candycrush;
 
+import be.kuleuven.candycrush.model.Position;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -40,7 +41,9 @@ public class CandyCrushController {
         int x = (int) mouseEvent.getX() / (300/model.getWidth());
         int y = (int) mouseEvent.getY() / (300/model.getHeight());
         int index = y * model.getWidth() + x;
-        model.removeCandy(index);
+
+
+        model.removeCandy(Position.fromIndex(index, model.getBoardSize()));
         view.update();
         score.setText(model.getScore()+"");
     }

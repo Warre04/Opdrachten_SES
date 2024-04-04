@@ -32,14 +32,14 @@ public class CandyCrushView extends Region {
         }
     }
     public Color getColor(int i) {
-        switch(i) {
-            case 1: return Color.RED;
-            case 2: return Color.BLUE;
-            case 3: return Color.GREEN;
-            case 4: return Color.YELLOW;
-            case 5: return Color.PURPLE;
-        }
-        return null;
+        return switch (i) {
+            case 1 -> Color.RED;
+            case 2 -> Color.BLUE;
+            case 3 -> Color.GREEN;
+            case 4 -> Color.YELLOW;
+            case 5 -> Color.PURPLE;
+            default -> null;
+        };
     }
 
 }
