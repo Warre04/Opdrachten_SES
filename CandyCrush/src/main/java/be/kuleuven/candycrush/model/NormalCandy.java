@@ -1,11 +1,10 @@
 package be.kuleuven.candycrush.model;
 
-import javafx.scene.paint.Color;
 
-public record NormalCandy(Color kleur , int value) implements Candy {
+public record NormalCandy(int Color) implements Candy {
     public NormalCandy {
-        if (value >=0 && value < 4) {
-            throw new IllegalArgumentException("Value must be between 1 and 5");
+        if (Color < 0 || Color > 3) {
+            throw new IllegalArgumentException("Value must be 0,1,2 or 3");
         }
     }
 }

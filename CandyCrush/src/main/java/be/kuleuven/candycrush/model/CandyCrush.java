@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class CandyCrush {
 
-    private ArrayList<Integer> grid;
+    private ArrayList<Candy> grid;
     private int score;
     private BoardSize boardSize;
     private String name;
@@ -11,7 +11,7 @@ public class CandyCrush {
     public CandyCrush() {
         boardSize= new BoardSize(10,10);
         this.name = "player32548";
-        this.grid = new ArrayList<Integer>();
+        this.grid = new ArrayList<Candy>();
         this.score = 0;
         this.generateGrid();
     }
@@ -19,10 +19,10 @@ public class CandyCrush {
     public void generateGrid() {
         this.grid.clear();
         for (int i = 0; i < this.boardSize.hoogte() * this.boardSize.breedte(); i++) {
-            this.grid.add((int) (Math.random() * 5)+1);
+            this.grid.add(Candy.getRandomCandy());
         }
     }
-    public void setGrid(ArrayList<Integer> grid) {
+    public void setGrid(ArrayList<Candy> grid) {
         this.grid = grid;
     }
 
@@ -52,27 +52,30 @@ public class CandyCrush {
     public BoardSize getBoardSize() {
         return this.boardSize;
     }
-    public ArrayList<Integer> getGrid() {
+    public ArrayList<Candy> getGrid() {
         return this.grid;
     }
 
     public void removeCandy(Position pos) {
         ArrayList<Position> candyToReplace = (ArrayList<Position>) getSameNeighbours(pos);
+        System.out.println(candyToReplace.size());
         if(candyToReplace.size() < 3) {
             return;
         }
         for (Position i : candyToReplace) {
-            this.grid.set(i.toIndex(), (int) (Math.random() * 5)+1);
+            this.grid.set(i.toIndex(), Candy.getRandomCandy());
         }
         addScore(candyToReplace.size());
     }
+
+
 
     private Iterable<Position> getSameNeighbours(Position pos){
         ArrayList<Position> neighborPositions= (ArrayList<Position>) pos.neighborPositions();
         ArrayList<Position> equalNeighborPositions= new ArrayList<>();
         equalNeighborPositions.add(pos);
         for (Position neighbor : neighborPositions) {
-            if (this.grid.get(neighbor.toIndex()) == this.grid.get(pos.toIndex())) {
+            if (this.grid.get(neighbor.toIndex()).equals( this.grid.get(pos.toIndex())) ){
                 equalNeighborPositions.add(neighbor);
             }
         }
