@@ -3,27 +3,24 @@ import java.util.ArrayList;
 
 public class CandyCrush {
 
-    private ArrayList<Candy> grid;
     private int score;
     private BoardSize boardSize;
     private String name;
+    private Board<Candy> board;
 
     public CandyCrush() {
-        boardSize= new BoardSize(10,10);
+        this.board = new Board<Candy>();
+        boardSize= board.getBoardSize();
         this.name = "player32548";
-        this.grid = new ArrayList<Candy>();
         this.score = 0;
         this.generateGrid();
     }
 
     public void generateGrid() {
-        this.grid.clear();
-        for (int i = 0; i < this.boardSize.hoogte() * this.boardSize.breedte(); i++) {
-            this.grid.add(Candy.getRandomCandy());
-        }
+        this.board.fill((pos) -> Candy.getRandomCandy());
     }
     public void setGrid(ArrayList<Candy> grid) {
-        this.grid = grid;
+        board.setCells(grid);
     }
 
     public void reset() {
@@ -53,7 +50,7 @@ public class CandyCrush {
         return this.boardSize;
     }
     public ArrayList<Candy> getGrid() {
-        return this.grid;
+        return this.board.getCells();
     }
 
     public void removeCandy(Position pos) {
@@ -63,7 +60,7 @@ public class CandyCrush {
             return;
         }
         for (Position i : candyToReplace) {
-            this.grid.set(i.toIndex(), Candy.getRandomCandy());
+            this.board.replaceCellAt(i, Candy.getRandomCandy());
         }
         addScore(candyToReplace.size());
     }
@@ -75,12 +72,13 @@ public class CandyCrush {
         ArrayList<Position> equalNeighborPositions= new ArrayList<>();
         equalNeighborPositions.add(pos);
         for (Position neighbor : neighborPositions) {
-            if (this.grid.get(neighbor.toIndex()).equals( this.grid.get(pos.toIndex())) ){
+            if (this.board.getCellAt(neighbor).equals( this.board.getCellAt(pos)) ){
                 equalNeighborPositions.add(neighbor);
             }
         }
         return equalNeighborPositions;
     }
+
 
 
 }

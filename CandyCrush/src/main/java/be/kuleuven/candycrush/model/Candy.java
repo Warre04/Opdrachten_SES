@@ -4,6 +4,7 @@ import javafx.scene.paint.Color;
 
 public sealed interface Candy permits Drop, Lekstok, Napoleon, NormalCandy, Zuurtje {
 
+
     public static Candy getRandomCandy() {
         int random = (int) (Math.random() * 5);
         switch (random) {
@@ -16,19 +17,23 @@ public sealed interface Candy permits Drop, Lekstok, Napoleon, NormalCandy, Zuur
             case 3:
                 return new NormalCandy(3);
             case 4:
-                switch ((int) (Math.random() * 4)) {
-                    case 0:
-                        return new Drop();
-                    case 1:
-                        return new Lekstok();
-                    case 2:
-                        return new Napoleon();
-                    default:
-                        return new Zuurtje();
-                }
+                return getRandomSpecialCandy();
             default:
                 return new NormalCandy(0);
         }
+    }
+
+    public static Candy GetNormalCandy(int color) {
+        return new NormalCandy(color);
+
+    }
+    public static Candy getRandomSpecialCandy(){
+        return switch ((int) (Math.random() * 4)) {
+            case 0 -> new Drop();
+            case 1 -> new Lekstok();
+            case 2 -> new Napoleon();
+            default -> new Zuurtje();
+        };
     }
 
     public default Color getColor(){
