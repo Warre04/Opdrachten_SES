@@ -25,8 +25,8 @@ public class CandyCrushView extends Region {
             int y = i.getKey().y();
             if (i.getValue().isSpecial()){
                 Rectangle s = new Rectangle();
-                s.setWidth((double) 300/model.getWidth());
-                s.setHeight((double) 300/model.getHeight());
+                s.setWidth((double) 300/model.getBoard().getBoardSize().breedte());
+                s.setHeight((double) 300/model.getBoard().getBoardSize().hoogte());
                 s.setX(x*s.getWidth());
                 s.setY(y*s.getHeight());
                 s.setFill(i.getValue().getColor());
@@ -35,8 +35,8 @@ public class CandyCrushView extends Region {
                 
             else {
                 Ellipse ellipse = new Ellipse();
-                ellipse.setRadiusY((double) 150/model.getHeight());
-                ellipse.setRadiusX((double) 150/model.getWidth());
+                ellipse.setRadiusY((double) 150/model.getBoard().getBoardSize().hoogte());
+                ellipse.setRadiusX((double) 150/model.getBoard().getBoardSize().breedte());
                 ellipse.setCenterX(ellipse.getRadiusX()+x*2*ellipse.getRadiusX());
                 ellipse.setCenterY(ellipse.getRadiusX()+y*2*ellipse.getRadiusX());
                 ellipse.setFill(i.getValue().getColor());

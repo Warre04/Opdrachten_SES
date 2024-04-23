@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import be.kuleuven.candycrush.model.Position;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -67,7 +68,19 @@ public class PositionTest {
             assert true;
         }
     }
-
+    @Test
+    public void TestWalkLeft(){
+        Position position = new Position(3, 1, new BoardSize(4, 4));
+        Stream<Position> positions =  position.walkLeft();
+        ArrayList<Position> positionsList = new ArrayList<>();
+        positions.forEach(positionsList::add);
+        positionsList.forEach(Position::print);
+        assert positionsList.size() == 4;
+        assert positionsList.get(0).equals(new Position(3, 1, new BoardSize(4, 4)));
+        assert positionsList.get(1).equals(new Position(2, 1, new BoardSize(4, 4)));
+        assert positionsList.get(2).equals(new Position(1, 1, new BoardSize(4, 4)));
+        assert positionsList.get(3).equals(new Position(0, 1, new BoardSize(4, 4)));
+    }
 
     @Test
     public void TestPositionNeighborPositionsXis0Yis0() {
@@ -93,9 +106,45 @@ public class PositionTest {
         assert neighborPositions.get(6).equals(new Position(3, 1, new BoardSize(4, 4)));
         assert neighborPositions.get(7).equals(new Position(3, 2, new BoardSize(4, 4)));
     }
+
     @Test
     public void TestPositionIsLastInRow() {
         Position position = new Position(3, 1, new BoardSize(4, 4));
         assert position.isLastInRow();
+    }
+    @Test
+    public void TestWalkRight(){
+        Position position = new Position(1, 3, new BoardSize(4, 4));
+        Stream<Position> positions =  position.walkRight();
+        ArrayList<Position> positionsList = new ArrayList<>();
+        positions.forEach(positionsList::add);
+        positionsList.forEach(Position::print);
+        assert positionsList.size() == 3;
+        assert positionsList.get(0).equals(new Position(1, 3, new BoardSize(4, 4)));
+        assert positionsList.get(1).equals(new Position(2, 3, new BoardSize(4, 4)));
+        assert positionsList.get(2).equals(new Position(3, 3, new BoardSize(4, 4)));
+    }
+    @Test
+    public void TestWalkUp(){
+        Position position = new Position(1, 2, new BoardSize(4, 4));
+        Stream<Position> positions =  position.walkUp();
+        ArrayList<Position> positionsList = new ArrayList<>();
+        positions.forEach(positionsList::add);
+        positionsList.forEach(Position::print);
+        assert positionsList.size() == 3;
+        assert positionsList.get(0).equals(new Position(1, 2, new BoardSize(4, 4)));
+        assert positionsList.get(1).equals(new Position(1, 1, new BoardSize(4, 4)));
+        assert positionsList.get(2).equals(new Position(1, 0, new BoardSize(4, 4)));
+    }
+    @Test
+    public void TestWalkDown(){
+        Position position = new Position(1, 2, new BoardSize(4, 4));
+        Stream<Position> positions =  position.walkDown();
+        ArrayList<Position> positionsList = new ArrayList<>();
+        positions.forEach(positionsList::add);
+        positionsList.forEach(Position::print);
+        assert positionsList.size() == 2;
+        assert positionsList.get(0).equals(new Position(1, 2, new BoardSize(4, 4)));
+        assert positionsList.get(1).equals(new Position(1, 3, new BoardSize(4, 4)));
     }
 }

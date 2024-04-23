@@ -38,12 +38,12 @@ public class CandyCrushController {
         }
 
     private void mouseClicked(MouseEvent mouseEvent) {
-        int x = (int) mouseEvent.getX() / (300/model.getWidth());
-        int y = (int) mouseEvent.getY() / (300/model.getHeight());
-        int index = y * model.getWidth() + x;
+        int x = (int) mouseEvent.getX() / (300/model.getBoard().getBoardSize().breedte());
+        int y = (int) mouseEvent.getY() / (300/model.getBoard().getBoardSize().hoogte());
+        int index = y * model.getBoard().getBoardSize().breedte() + x;
 
 
-        model.removeCandy(Position.fromIndex(index, model.getBoardSize()));
+        model.removeCandy(Position.fromIndex(index, model.getBoard().getBoardSize()));
         view.update();
         score.setText(model.getScore()+"");
     }

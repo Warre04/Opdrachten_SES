@@ -8,8 +8,8 @@ public class Board<T> {
     private Map<Position, T> cells;
     private Map<T,ArrayList<Position>> reverseCells;
 
-    public Board() {
-        this.boardSize = new BoardSize(10, 10);
+    public Board(int formaat) {
+        this.boardSize = new BoardSize(formaat, formaat);
         this.cells = new HashMap<>();
         this.reverseCells=new HashMap<>();
     }

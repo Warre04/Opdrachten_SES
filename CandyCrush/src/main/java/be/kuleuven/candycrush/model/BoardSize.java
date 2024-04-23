@@ -1,6 +1,7 @@
 package be.kuleuven.candycrush.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public record BoardSize(int breedte, int hoogte) {
     public BoardSize {
@@ -9,7 +10,7 @@ public record BoardSize(int breedte, int hoogte) {
         }
     }
 
-    public Iterable<Position> positions()
+    public Collection<Position> positions()
     {
         ArrayList<Position> positions = new ArrayList<Position>();
         for (int i = 0; i < hoogte; i++) {
@@ -17,7 +18,7 @@ public record BoardSize(int breedte, int hoogte) {
                 positions.add(new Position(j, i, this));
             }
         }
-        return (Iterable<Position>)positions;
+        return positions;
     }
 
 }
