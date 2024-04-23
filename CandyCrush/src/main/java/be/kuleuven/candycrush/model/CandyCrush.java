@@ -19,9 +19,6 @@ public class CandyCrush {
     public void generateGrid() {
         this.board.fill((pos) -> Candy.getRandomCandy());
     }
-    public void setGrid(ArrayList<Candy> grid) {
-        board.setCells(grid);
-    }
 
     public void reset() {
         this.score = 0;
@@ -49,13 +46,12 @@ public class CandyCrush {
     public BoardSize getBoardSize() {
         return this.boardSize;
     }
-    public ArrayList<Candy> getGrid() {
-        return this.board.getCells();
+    public Board<Candy> getBoard(){
+        return this.board;
     }
 
     public void removeCandy(Position pos) {
         ArrayList<Position> candyToReplace = (ArrayList<Position>) getSameNeighbours(pos);
-        System.out.println(candyToReplace.size());
         if(candyToReplace.size() < 3) {
             return;
         }

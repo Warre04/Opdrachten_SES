@@ -43,25 +43,25 @@ public class CandyCrushTest {
     @Test
     public void TestCandyCrushAanmaken_ResultGridIsNotEmpty() {
         CandyCrush model = new CandyCrush();
-        assert !model.getGrid().isEmpty();
+        assert !model.getBoard().getCells().isEmpty();
     }
     @Test
     public void TestCandyCrushAanmaken_ResultGridSizeISHeigthxWidth() {
         CandyCrush model = new CandyCrush();
-        assert model.getGrid().size() == model.getHeight() * model.getWidth();
+        assert model.getBoard().getCells().size() == model.getHeight() * model.getWidth();
     }
     @Test
     public void TestsetName_CandyCrushReset_GritNotSize0() {
         CandyCrush model = new CandyCrush();
         model.setName("Warre");
         model.reset();
-        assert !model.getGrid().isEmpty();
+        assert !model.getBoard().getCells().isEmpty();
     }
     @Test
     public void TestsetName_CandyCrushReset_GritSizeIsHeigthxWidth() {
         CandyCrush model = new CandyCrush();
         model.setName("Warre");
         model.reset();
-        assert model.getGrid().size() == model.getHeight() * model.getWidth();
+        assert model.getBoard().getCells().size() == model.getHeight() * model.getWidth();
     }
 }
