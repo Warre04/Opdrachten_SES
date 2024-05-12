@@ -13,6 +13,11 @@ public class Board<T> {
         this.cells = new HashMap<>();
         this.reverseCells=new HashMap<>();
     }
+    public Board(Board board){
+        this.boardSize = board.getBoardSize();
+        this.cells = new HashMap<>(board.getCells());
+        this.reverseCells = new HashMap<>(board.reverseCells);
+    }
 
     public T getCellAt(Position pos) {
         return this.cells.get(pos);
@@ -77,4 +82,6 @@ public class Board<T> {
             }
         }
     }
+
+
 }

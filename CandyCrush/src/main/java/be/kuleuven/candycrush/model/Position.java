@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 public record Position(int x, int y, BoardSize board) {
     public Position {
         if ((x < 0) || (y < 0) || (x >= board.breedte()) || (y >= board.hoogte())) {
+            System.out.println("Invalid position"+x+" "+y+" "+board.breedte()+" "+board.hoogte());
             throw new IndexOutOfBoundsException("Invalid position");
         }
     }

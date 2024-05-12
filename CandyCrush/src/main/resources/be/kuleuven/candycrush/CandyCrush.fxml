@@ -3,12 +3,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.candycrush.CandyCrushController">
+<AnchorPane fx:id="paneel" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.candycrush.CandyCrushController">
    <children>
       <Button fx:id="resetBTN" layoutX="531.0" layoutY="14.0" mnemonicParsing="false" text="Reset" />
+      <Button fx:id="TestBTN" layoutX="350.0" layoutY="14.0" mnemonicParsing="false" text="Get Optimal Solution" />
+
       <Label layoutX="14.0" layoutY="18.0" text="Welkom  " />
       <Label fx:id="name" layoutX="65.0" layoutY="18.0" text="Player15798" />
       <Label layoutX="14.0" layoutY="39.0" text="Score:  " />
+      <Label layoutX="14.0" layoutY="60.0" text="Optimal Score:  " />
+      <Label fx:id="Oscore" layoutX="100.0" layoutY="60.0" text="0" />
+
+
       <Label fx:id="score" layoutX="54.0" layoutY="39.0" text="0" />
       <AnchorPane fx:id="gridPaneel" layoutX="150.0" layoutY="50.0" prefHeight="300.0" prefWidth="300.0" />
    </children>

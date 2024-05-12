@@ -6,20 +6,13 @@ public sealed interface Candy permits Drop, Lekstok, Napoleon, NormalCandy, Zuur
 
 
     public static Candy getRandomCandy() {
-        int random = (int) (Math.random() * 5);
+        int random = (int) (Math.random() * 10);
         switch (random) {
             case 0:
-                return new NormalCandy(0);
-            case 1:
-                return new NormalCandy(1);
-            case 2:
-                return new NormalCandy(2);
-            case 3:
-                return new NormalCandy(3);
-            case 4:
                 return getRandomSpecialCandy();
             default:
-                return new NormalCandy(0);
+                int randomNormal= (int) (Math.random() * 4);
+                return new NormalCandy(randomNormal);
         }
     }
 
@@ -54,6 +47,17 @@ public sealed interface Candy permits Drop, Lekstok, Napoleon, NormalCandy, Zuur
     }
     public default boolean isSpecial() {
         return this instanceof Drop || this instanceof Lekstok || this instanceof Napoleon || this instanceof Zuurtje;
+    }
+
+    public static Candy charToCandy(char c){
+        return switch(c) {
+            case 'o' -> new NormalCandy(0);
+            case '*' -> new NormalCandy(1);
+            case '#' -> new NormalCandy(2);
+            case '@' -> new NormalCandy(3);
+            case 'N' -> null;
+            default -> throw new IllegalArgumentException("Unexpected value: " + c);
+        };
     }
 
 
