@@ -17,26 +17,13 @@ public class CandyCrushTest {
         model.setName("Warre");
         assert model.getName().equals("Warre");
     }
-    @Test
-    public void TestSetScoreTo10ANDSetScoreTo11_ResultScoreIs21() {
-        CandyCrush model = new CandyCrush(10);
-        model.addScore(10);
-        model.addScore(11);
-        assert model.getScore() == 21;
-    }
-    @Test
-    public void TestSetscore10ANDrest_ResultScoreIs0() {
-        CandyCrush model = new CandyCrush(10);
-        model.addScore(10);
-        model.reset();
-        assert model.getScore() == 0;
-    }
+
+
     @Test
     public void TestSetScoreTo10ANDSetScoreTomin11_ResultScoreIsmin1() {
-        CandyCrush model = new CandyCrush(10);
-        model.addScore(10);
-        model.addScore(-11);
-        assert model.getScore() == -1;
+        CandyCrush model = new CandyCrush(4,"NNNNo*@*#@o#o#@*");
+
+        assert model.getScore() == 4;
     }
     @Test
     public void testSetNameToWarre_Thenreset_ResultNameIsWarre() {
@@ -76,7 +63,7 @@ public class CandyCrushTest {
         model.getBoard().fill((pos) -> new NormalCandy(2));
         Candy candy = new NormalCandy(2);
         Position pos1 = new Position(0,0, model.getBoard().getBoardSize());
-        assert model.firstTwoHaveCandy(candy, pos1.walkDown());
+        assert model.firstTwoHaveCandy(candy, pos1.walkDown(),model.getBoard());
     }
     @Test
     public void TestFirstTwoHaveCandyWhithShortStream(){
@@ -84,7 +71,7 @@ public class CandyCrushTest {
         model.getBoard().fill((pos) -> new NormalCandy(2));
         Candy candy = new NormalCandy(2);
         Position pos1 = new Position(9,0, model.getBoard().getBoardSize());
-        assert !model.firstTwoHaveCandy(candy, pos1.walkRight());
+        assert !model.firstTwoHaveCandy(candy, pos1.walkRight(),model.getBoard());
     }
     @Test
     public void TestHorizontalStartingPosition(){
@@ -102,7 +89,7 @@ public class CandyCrushTest {
         model.getBoard().replaceCellAt(new Position(7,1, model.getBoard().getBoardSize()), new NormalCandy(1));
         model.getBoard().replaceCellAt(new Position(8,1, model.getBoard().getBoardSize()), new NormalCandy(1));
         model.getBoard().replaceCellAt(new Position(9,1, model.getBoard().getBoardSize()), new NormalCandy(1));
-        assert model.horizontalStartingPositions().count()==12;
+        assert model.horizontalStartingPositions(model.getBoard()).count()==12;
     }
     @Test
     public void TestlongestMatchToRight(){
@@ -110,10 +97,10 @@ public class CandyCrushTest {
         model.getBoard().fill((pos) -> new NormalCandy(2));
         model.getBoard().replaceCellAt(new Position(3,0, model.getBoard().getBoardSize()), new NormalCandy(3));
 
-        assert model.longestMatchToRight(new Position(0,0, model.getBoard().getBoardSize())).size()==3;
-        assert model.longestMatchToRight(new Position(0,0, model.getBoard().getBoardSize())).get(0).equals(new Position(0,0, model.getBoard().getBoardSize()));
-        assert model.longestMatchToRight(new Position(0,0, model.getBoard().getBoardSize())).get(1).equals(new Position(1,0, model.getBoard().getBoardSize()));
-        assert model.longestMatchToRight(new Position(0,0, model.getBoard().getBoardSize())).get(2).equals(new Position(2,0, model.getBoard().getBoardSize()));
+        assert model.longestMatchToRight(new Position(0,0, model.getBoard().getBoardSize()),model.getBoard()).size()==3;
+        assert model.longestMatchToRight(new Position(0,0, model.getBoard().getBoardSize()),model.getBoard()).get(0).equals(new Position(0,0, model.getBoard().getBoardSize()));
+        assert model.longestMatchToRight(new Position(0,0, model.getBoard().getBoardSize()),model.getBoard()).get(1).equals(new Position(1,0, model.getBoard().getBoardSize()));
+        assert model.longestMatchToRight(new Position(0,0, model.getBoard().getBoardSize()),model.getBoard()).get(2).equals(new Position(2,0, model.getBoard().getBoardSize()));
     }
     @Test
     public void TestFindAllMatches(){
@@ -129,9 +116,30 @@ public class CandyCrushTest {
         model.getBoard().replaceCellAt(new Position(0,3, model.getBoard().getBoardSize()), new NormalCandy(3));
         model.getBoard().replaceCellAt(new Position(1,3, model.getBoard().getBoardSize()), new NormalCandy(3));
         model.getBoard().replaceCellAt(new Position(2,3, model.getBoard().getBoardSize()), new NormalCandy(3));
-        assert model.findAllMatches().size()==5;
+        assert model.findAllMatches(model.getBoard()).size()==5;
 
     }
 
+    @Test
+    public void TestFindOptimalSolutionModel1(){
+        CandyCrush model = new CandyCrush(4,"@@o#o*#o@@***#@@");
+        model.findBestSolution();
+        assert model.getOptimalSolution().steps().size()==4;
+        assert model.getOptimalSolution().score()==16;
+    }
 
+    @Test
+    public void TestFindOptimalSolutionModel2(){
+        CandyCrush model = new CandyCrush(5,"#oo###@o@@*##o@@@*@o**#*o");
+        model.findBestSolution();
+        assert model.getOptimalSolution().steps().size()==7;
+        assert model.getOptimalSolution().score()==23;
+    }
+    @Test
+    public void TestFindOptimalSolutionModel3(){
+        CandyCrush model = new CandyCrush(6,"#@#oo@@**@**o##@#o@#oo#@@*@**@*#@##*");
+        model.findBestSolution();
+        assert model.getOptimalSolution().steps().size()==9;
+        assert model.getOptimalSolution().score()==33;
+    }
 }

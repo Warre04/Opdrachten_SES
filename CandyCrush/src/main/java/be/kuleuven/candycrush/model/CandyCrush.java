@@ -55,9 +55,6 @@ public class CandyCrush {
         return this.score;
     }
 
-    public void addScore(int score) {
-        this.score += score;
-    }
 
     public Board<Candy> getBoard() {
         return this.board;
@@ -111,7 +108,6 @@ public class CandyCrush {
     public Set<List<Position>> findAllMatches(Board<Candy> boardToCheck) {
         Set<List<Position>> horizontalSet = horizontalStartingPositions(boardToCheck).map(p -> longestMatchToRight(p, boardToCheck)).filter(list -> list.size() >= 3).collect(Collectors.toSet());
         verticalStartingPositions(boardToCheck).map(p -> longestMatchDown(p, boardToCheck)).filter(list -> list.size() > 2).forEach(horizontalSet::add);
-
         return horizontalSet;
     }
 
@@ -294,7 +290,6 @@ public class CandyCrush {
             Board<Candy> newBoard = new Board<>(currant.board());
             swap(swap[1], swap[0], newBoard);
             updateBoard(newBoard);
-
             int score = (int) newBoard.getCells().entrySet().stream().filter(entry -> entry.getValue() == null).count();
             List<Position[]> newSteps = new ArrayList<>(currant.steps());
             newSteps.add(swap);

@@ -16,9 +16,7 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        //model = new CandyCrush(4,"@@o#o*#o@@***#@@");
         model = new CandyCrush(5,"#oo###@o@@*##o@@@*@o**#*o");
-        //model = new CandyCrush(6,"#@#oo@@**@**o##@#o@#oo#@@*@**@*#@##*");
         //model = new CandyCrush(10);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("StartScherm.fxml"));
         scene = new Scene(fxmlLoader.load(), 600, 400);
